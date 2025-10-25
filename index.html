@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Gulshan Kumar — Portfolio</title>
+  <meta name="description" content="Personal portfolio website of Gulshan Kumar. Clean, fast, mobile‑friendly, and Netlify-ready." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="shortcut icon" href="./IMG-20250423-WA0052.jpg" type="image/x-icon">
+  <style>
+    :root {
+      --bg: #0d1117;
+      --panel: #111827;
+      --soft: #1f2937;
+      --text: #e5e7eb;
+      --muted: #9ca3af;
+      --brand: #22d3ee; /* cyan */
+      --accent: #a78bfa; /* violet */
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
+      --radius: 18px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin:0; font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif; background: var(--bg); color: var(--text); }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+
+    .container { width: min(1120px, 92vw); margin: 0 auto; }
+    header { position: sticky; top: 0; z-index: 50; backdrop-filter: blur(8px); background: linear-gradient(to bottom, rgba(13,17,23,.85), rgba(13,17,23,.35)); border-bottom: 1px solid rgba(255,255,255,.06); }
+    .nav { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 14px 0; }
+    .logo { display:flex; align-items:center; gap:10px; font-weight:800; letter-spacing:.5px; }
+    .logo-badge { width:36px; height:36px; border-radius:12px; background: linear-gradient(135deg, var(--brand), var(--accent)); display:grid; place-items:center; box-shadow: var(--shadow); font-weight:800; color:#0b1020; }
+    .nav a { opacity:.9; padding:8px 12px; border-radius:12px; }
+    .nav a:hover { background: rgba(255,255,255,.06); }
+    .menu { display:flex; gap:6px; flex-wrap:wrap; }
+    .cta-btn { background: linear-gradient(135deg, var(--brand), var(--accent)); padding:10px 14px; border-radius:14px; color:#0b1020; font-weight:700; box-shadow: var(--shadow); }
+
+    .hero { padding: 96px 0 42px; }
+    .hero-wrap { display:grid; grid-template-columns: 1.15fr .85fr; gap:38px; align-items:center; }
+    .title { font-size: clamp(32px, 6vw, 54px); line-height: 1.05; font-weight: 800; letter-spacing:-.5px; }
+    .title .grad { background: linear-gradient(135deg, var(--brand), var(--accent)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    .subtitle { color: var(--muted); margin-top: 14px; font-size: clamp(15px, 2.5vw, 18px); }
+    .hero-card { background: linear-gradient(180deg, rgba(34,211,238,.08), rgba(167,139,250,.06)); border:1px solid rgba(255,255,255,.06); border-radius: var(--radius); padding: 18px; box-shadow: var(--shadow); }
+    .badges { display:flex; gap:8px; flex-wrap:wrap; margin:18px 0 8px; }
+    .chip { background: #0f172a; color:#cbd5e1; border: 1px solid rgba(255,255,255,.08); padding:8px 12px; border-radius: 999px; font-size: 13px; }
+    .quick { display:flex; gap:10px; margin-top: 16px; }
+    .quick a { background: rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.08); padding:10px 14px; border-radius:12px; }
+
+    .avatar-card { background: var(--panel); border:1px solid rgba(255,255,255,.06); border-radius: var(--radius); padding: 16px; text-align:center; box-shadow: var(--shadow); }
+    .avatar img { width: 200px; height: 200px; margin: 8px auto 12px; border-radius: 24px; object-fit: cover; }
+    .socials { display:flex; justify-content:center; gap:10px; margin-top:8px; }
+    .socials a { background: rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.08); padding:8px 10px; border-radius:12px; font-size:14px; }
+
+    section { padding: 54px 0; }
+    .section-title { font-size: 28px; font-weight: 800; margin-bottom: 18px; text-align: center; }
+    .grid { display:grid; gap:16px; }
+    .grid-3 { grid-template-columns: repeat(3, 1fr); }
+    .grid-2 { grid-template-columns: repeat(2, 1fr); }
+
+    .card { background: var(--panel); border: 1px solid rgba(255,255,255,.06); border-radius: var(--radius); padding: 18px; box-shadow: var(--shadow); }
+    .card h3 { margin:8px 0 6px; font-size: 18px; }
+    .muted { color: var(--muted); font-size: 14px; }
+
+    .skills { display:flex; gap:10px; flex-wrap:wrap; }
+    .skill { background: #0b1220; border:1px solid rgba(255,255,255,.06); padding:10px 12px; border-radius: 12px; }
+
+    .timeline { position:relative; padding-left: 18px; }
+    .timeline:before { content:""; position:absolute; left:3px; top:0; bottom:0; width:2px; background: linear-gradient(var(--brand), var(--accent)); opacity:.55; }
+    .t-item { position:relative; margin: 14px 0; }
+    .t-item:before { content:""; position:absolute; left:-2px; top:6px; width:10px; height:10px; border-radius:999px; background: var(--brand); box-shadow: 0 0 0 3px rgba(34,211,238,.15); }
+
+    .projects .card { display:flex; flex-direction:column; }
+    .thumb { aspect-ratio: 16/9; background: #0b1325; border-radius: 12px; border:1px solid rgba(255,255,255,.06); overflow:hidden; display:grid; place-items:center; font-size: 14px; color: var(--muted); }
+    .actions { display:flex; gap:8px; margin-top:auto; }
+    .btn { background: rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.08); padding:10px 12px; border-radius: 12px; font-weight: 600; }
+    .btn.primary { background: linear-gradient(135deg, var(--brand), var(--accent)); color:#0b1020; }
+
+    form { display:grid; gap:12px; }
+    input, textarea { background:#0b1220; border:1px solid rgba(255,255,255,.1); border-radius:12px; padding:12px 14px; color: var(--text); }
+    textarea { min-height: 120px; }
+
+    footer { padding: 28px 0 42px; color: var(--muted); border-top: 1px solid rgba(255,255,255,.06); margin-top: 42px; }
+
+    @media (max-width: 900px) {
+      .hero { padding-top: 74px; }
+      .hero-wrap { grid-template-columns: 1fr; }
+      .grid-3 { grid-template-columns: 1fr; }
+      .grid-2 { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <div class="logo">
+        <div class="logo-badge"><img class="logo-badge" src="./IMG-20250423-WA0052.jpg" alt=""></div>
+        <div>Gulshan Kumar</div>
+      </div>
+      <nav class="menu">
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+        <a class="cta-btn" href="#contact">Hire Me</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="container hero-wrap">
+      <div>
+        <h1 class="title">Hi, I’m <span class="grad">Gulshan Kumar</span> — Developer & Blogger</h1>
+        <p class="subtitle">Lightning‑fast personal website inspired by clean design, mobile‑first, and deploys in seconds on Netlify.</p>
+
+        <div class="hero-card">
+          <div class="badges">
+            <span class="chip">HTML • CSS • JS</span>
+            <span class="chip">React (optional)</span>
+            <span class="chip">Blogger • SEO</span>
+            <span class="chip">Freelance Available</span>
+          </div>
+          <div class="quick">
+            <a href="#projects" class="btn primary">See Projects</a>
+            <a href="#contact" class="btn primary">Contact Now</a>
+            <a href="./My Resume.pdf" class="btn primary" download>Download CV</a>
+          </div>
+        </div>
+      </div>
+
+      <aside class="avatar-card">
+        <img src="./IMG-20250423-WA0052.jpg" alt="Gulshan Kumar" />
+        <div style="font-weight:700; font-size:18px;">Gulshan Kumar</div>
+        <div class="muted">Based in India • Available for work</div>
+        <div class="socials">
+          <a href="https://github.com/dashboard" target="_blank">GitHub</a>
+          <a href="https://www.linkedin.com/in/rs_gulshan_prajapati" target="_blank">LinkedIn</a>
+          <a href="https://x.com/RsGulshan/highlights" target="_blank">Twitter</a>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="container">
+      <h2 class="section-title">About</h2>
+      <div class="grid grid-2">
+        <div class="card">
+          <p>I’m a self‑taught developer and Hindi education blogger. Clean UI, fast performance, and easy content workflow are my priorities.</p>
+          <p class="muted">Special interest: GK content for competitive exams (NTPC, etc.), WebView Android apps, and lightweight websites that load under 1s.</p>
+        </div>
+        <div class="card timeline">
+          <div class="t-item">
+            <strong>2025 — Present</strong>
+            <div class="muted">Freelance Frontend Developer</div>
+          </div>
+          <div class="t-item">
+            <strong>2023 — 2024</strong>
+            <div class="muted">Built educational blogs & Android WebView apps</div>
+          </div>
+          <div class="t-item">
+            <strong>2022</strong>
+            <div class="muted">Started coding with HTML/CSS/JS</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills">
+    <div class="container">
+      <h2 class="section-title">Skills</h2>
+      <div class="card">
+        <div class="skills">
+          <span class="skill">HTML5</span>
+          <span class="skill">CSS3</span>
+          <span class="skill">JavaScript</span>
+          <span class="skill">React</span>
+          <span class="skill">Tailwind</span>
+          <span class="skill">Android WebView</span>
+          <span class="skill">SEO Basics</span>
+          <span class="skill">Netlify</span>
+          <span class="skill">Node.js</span>
+          <span class="skill">Express.js</span>
+          <span class="skill">MongoDB</span>
+          <span class="skill">Git</span>
+          <span class="skill">GitHub</span>
+          <span class="skill">MS Office</span>
+          <span class="skill">Photoshop</span>
+
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects" class="projects">
+    <div class="container">
+      <h2 class="section-title">Projects</h2>
+      <div class="grid grid-3">
+        <article class="card">
+          <div class="thumb"> <img src="./blog.png" alt=""></div>
+          <h3>GK Blog (Blogger)</h3>
+          <p class="muted">Hindi GK questions, study tips, and exam updates. Optimized for mobile and fast load.</p>
+          <div class="actions">
+            <a class="btn" href="https://gyankibate6.blogspot.com/" target="_blank">Live Demo</a>
+            <a class="btn" href="https://gyankibate6.blogspot.com/" target="_blank">Source</a>
+          </div>
+        </article>
+        <article class="card">
+          <div class="thumb"><img src="./app pic.jpg" alt=""></div>
+          <h3>WebView Android App</h3>
+          <p class="muted">Simple Android app that wraps a website with back/forward/home buttons.</p>
+          <div class="actions">
+            <a class="btn" href="https://github.com/GULSHANDIGITALZONE/my-app/releases/download/v1.0.0/Gyan_Ki_Bate.apk" target="_blank">APK</a>
+            <a class="btn" href="https://github.com/GULSHANDIGITALZONE/-" target="_blank">Code</a>
+          </div>
+        </article>
+        <article class="card">
+          <div class="thumb">Screenshot / Image</div>
+          <h3>Calculator (Kotlin)</h3>
+          <p class="muted">Clean two-line display, history view, and copy result.</p>
+          <div class="actions">
+            <a class="btn" href="#" target="_blank">Read More</a>
+            <a class="btn" href="#" target="_blank">GitHub</a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="container">
+      <h2 class="section-title">Contact</h2>
+      <div class="grid grid-2">
+        <div class="card">
+          <form name="contact" method="POST" data-netlify="true">
+            <input type="hidden" name="form-name" value="contact" />
+            <input required type="text" name="name" placeholder="Your Name" />
+            <input required type="email" name="email" placeholder="Email Address" />
+            <textarea name="message" placeholder="Your Message"></textarea>
+            <button class="btn primary" type="submit">Send Message</button>
+          </form>
+          <p class="muted" style="margin-top:8px;">This form works out of the box on Netlify (no backend needed).</p>
+        </div>
+        <div class="card">
+          <h3>Also available at</h3>
+          <p class="muted">Email: gulshanshk6@gmail.com</p>
+          <p class="muted">Phone: +91-6299050695</p>
+          <div class="badges">
+            <a class="chip" href="https://wa.me/916299050695" target="_blank">WhatsApp</a>
+            <a class="chip" href="https://t.me/yourid" target="_blank">Telegram</a>
+            <a class="chip" href="https://youtube.com/@yourid" target="_blank">YouTube</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container" style="display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap;">
+      <div>© <span id="y"></span> Gulshan Kumar</div>
+      <div class="socials">
+        <a href="https://github.com/dashboard" target="_blank">GitHub</a>
+        <a href="https://www.linkedin.com/in/rs_gulshan_prajapati" target="_blank">LinkedIn</a>
+        <a href="https://x.com/RsGulshan/highlights" target="_blank">Twitter</a>
+      </div>
+    </div>
+  </footer>
+  <script>
+    // Set current year in footer
+    document.getElementById('y').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
